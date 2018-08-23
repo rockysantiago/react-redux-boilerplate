@@ -3,7 +3,7 @@ import { create } from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
 import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import styled, { keyframes } from 'styled-components';
-import logo from 'assets/logo.svg';
+import { logo } from 'assets';
 
 const styleNode = document.createComment('insertion-point-jss');
 document.head.insertBefore(styleNode, document.head.firstChild);
