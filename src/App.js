@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
+import { create } from 'jss';
+import JssProvider from 'react-jss/lib/JssProvider';
+import { createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 import styled, { keyframes } from 'styled-components';
 import logo from 'assets/logo.svg';
+
+const styleNode = document.createComment('insertion-point-jss');
+document.head.insertBefore(styleNode, document.head.firstChild);
+
+const generateClassName = createGenerateClassName();
+const jss = create(jssPreset());
+jss.options.insertionPoint = 'insertion-point-jss';
 
 const AppWrapper = styled.div`
   text-align: center;
@@ -39,15 +49,17 @@ const AppIntro = styled.p`
 class App extends Component {
   render() {
     return (
-      <AppWrapper>
-        <AppHeader>
-          <AppLogo src={logo} alt="logo" />
-          <AppTitle>Welcome to React</AppTitle>
-        </AppHeader>
-        <AppIntro>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </AppIntro>
-      </AppWrapper>
+      <JssProvider jss={jss} generateClassName={generateClassName}>
+        <AppWrapper>
+          <AppHeader>
+            <AppLogo src={logo} alt="logo" />
+            <AppTitle>Welcome to React</AppTitle>
+          </AppHeader>
+          <AppIntro>
+            To get started, edit <code>src/App.js</code> and save to reload.
+          </AppIntro>
+        </AppWrapper>
+      </JssProvider>
     );
   }
 }
